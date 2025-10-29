@@ -5,8 +5,11 @@
 
 @implementation YoutubePlayer
 
+// ... (unchanged code for playVideo: and videoId retrieval) ...
+
 - (void)playVideo:(CDVInvokedUrlCommand*)command
 {
+    // ... (videoId retrieval and validation) ...
     NSString *videoId = [command.arguments objectAtIndex:0];
     
     if (!videoId || [videoId length] == 0) {
@@ -21,10 +24,17 @@
             
             if (video) {
                 
-                // 🌟 DEFINITIVE FIX: Use the preferredStreamURL method 🌟
-                // This property automatically selects the best available URL (e.g., highest quality)
-                // and avoids all ambiguity related to dictionary keys and integer constants.
-                NSURL *videoURL = video.preferredStreamURL;
+                NSDictionary *streamURLs = video.streamURLs;
+                
+                // 🌟 DEFINITIVE FIX: Use the dictionary to manually fetch the best quality. 🌟
+                // We prioritize the keys that are most likely to exist as NSStrings in the specific Pod version.
+                // NOTE: Keys like XCDYouTubeVideoQualityHD720 are NSString * in the headers.
+                // We use objectForKey: to manually select and ensure the key is treated as an object.
+                
+                // Try 720p, fallback to 360p, then lowest available quality key (XCDYouTubeVideoQualitySmall240)
+                NSURL *videoURL = [streamURLs objectForKey:XCDYouTubeVideoQualityHD720] ?: 
+                                  [streamURLs objectForKey:XCDYouTubeVideoQualityMedium360] ?:
+                                  [streamURLs objectForKey:XCDYouTubeVideoQualitySmall240]; 
                 
                 if (videoURL) {
                     
