@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="cordova-youtube-player"
+    version="1.0.0">
+
+    <name>Cordova Youtube Player</name>
+    
+    <js-module name="YoutubePlayer" src="www/YoutubePlayer.js">
+        <clobbers target="window.YoutubePlayer" />
+    </js-module>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="YoutubePlayer">
+                <param name="ios-package" value="YoutubePlayer" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/YoutubePlayer.h" />
+        <source-file src="src/ios/YoutubePlayer.m" />
+        
+        <framework src="AVKit" />
+        <framework src="AVFoundation" />
+        
+        <podspec>
+            <pods>
+                <pod name="XCDYouTubeKit" spec="~> 2.15" />
+            </pods>
+        </podspec>
+    </platform>
+</plugin>
