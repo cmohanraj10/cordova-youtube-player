@@ -9,6 +9,8 @@
         <clobbers target="window.YoutubePlayer" />
     </js-module>
 
+    <preference name="deployment-target" value="12.0" />
+
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="YoutubePlayer">
@@ -16,8 +18,6 @@
             </feature>
         </config-file>
         
-        <preference name="deployment-target" value="12.0" />
-
         <header-file src="src/ios/YoutubePlayer.h" />
         <source-file src="src/ios/YoutubePlayer.m" />
         
