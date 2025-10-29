@@ -7,7 +7,6 @@
 
 - (void)playVideo:(CDVInvokedUrlCommand*)command
 {
-    // ... (unchanged code for videoId retrieval) ...
     NSString *videoId = [command.arguments objectAtIndex:0];
     
     if (!videoId || [videoId length] == 0) {
@@ -22,10 +21,10 @@
             
             if (video) {
                 
-                NSDictionary *streamURLs = video.streamURLs;
-                
-                // 🌟 FINAL FIX: Explicitly cast to (NSString *) to force object interpretation 🌟
-                NSURL *videoURL = [streamURLs objectForKey:(NSString *)XCDYouTubeVideoQualityHD720] ?: [streamURLs objectForKey:(NSString *)XCDYouTubeVideoQualityMedium360];
+                // 🌟 DEFINITIVE FIX: Use the preferredStreamURL method 🌟
+                // This property automatically selects the best available URL (e.g., highest quality)
+                // and avoids all ambiguity related to dictionary keys and integer constants.
+                NSURL *videoURL = video.preferredStreamURL;
                 
                 if (videoURL) {
                     
