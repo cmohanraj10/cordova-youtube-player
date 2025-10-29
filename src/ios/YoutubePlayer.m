@@ -24,12 +24,11 @@
                 
                 NSDictionary *streamURLs = video.streamURLs;
                 
-                // 🌟 DEFINITIVE FIX: Explicitly cast to (id) 🌟
-                // The compiler MUST accept (id) as the key type for NSDictionary access.
-                NSURL *videoURL = [streamURLs objectForKey:(id)XCDYouTubeVideoQualityHD720] ?: [streamURLs objectForKey:(id)XCDYouTubeVideoQualityMedium360];
+                // 🌟 FINAL FIX: Explicitly cast to (NSString *) to force object interpretation 🌟
+                NSURL *videoURL = [streamURLs objectForKey:(NSString *)XCDYouTubeVideoQualityHD720] ?: [streamURLs objectForKey:(NSString *)XCDYouTubeVideoQualityMedium360];
                 
                 if (videoURL) {
-                    // ... (rest of the successful playback code) ...
+                    
                     AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
                     playerViewController.player = [AVPlayer playerWithURL:videoURL];
                     
