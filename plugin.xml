@@ -15,6 +15,8 @@
                 <param name="ios-package" value="YoutubePlayer" />
             </feature>
         </config-file>
+        
+        <preference name="deployment-target" value="12.0" />
 
         <header-file src="src/ios/YoutubePlayer.h" />
         <source-file src="src/ios/YoutubePlayer.m" />

@@ -1,21 +1,21 @@
 {
-    "name": "cordova-youtube-player",
-    "version": "1.0.0",
-    "description": "A reliable iOS Cordova plugin to play YouTube videos using the native AVPlayer (via XCDYouTubeKit).",
-    "cordova": {
-      "id": "cordova-youtube-player",
-      "platforms": [
-        "ios"
-      ]
-    },
-    "keywords": [
-      "cordova",
-      "youtube",
-      "ios",
-      "native",
-      "ecosystem:cordova",
-      "player"
-    ],
-    "author": "Your Name or Company Name",
-    "license": "MIT"
-  }
+  "name": "cordova-youtube-player",
+  "version": "1.0.0",
+  "description": "A reliable iOS Cordova plugin to play YouTube videos using the native AVPlayer (via XCDYouTubeKit).",
+  "cordova": {
+    "id": "cordova-youtube-player",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "youtube",
+    "ios",
+    "native",
+    "ecosystem:cordova",
+    "player"
+  ],
+  "author": "Your Name or Company Name",
+  "license": "MIT"
+}

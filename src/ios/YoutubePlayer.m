@@ -1,7 +1,7 @@
 #import "YoutubePlayer.h"
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "XCDYouTubeKit/XCDYouTubeKit.h" // The pod dependency
+#import "XCDYouTubeKit/XCDYouTubeKit.h" 
 
 @implementation YoutubePlayer
 
@@ -25,9 +25,11 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 if (video) {
-                    // 3. Select a suitable stream URL (720p preferred, falling back to 360p)
+                    // 3. FIX: Use objectForKey: syntax for NSDictionary access
                     NSDictionary *streamURLs = video.streamURLs;
-                    NSURL *videoURL = streamURLs[XCDYouTubeVideoQualityHD720] ?: streamURLs[XCDYouTubeVideoQualityMedium360];
+                    
+                    // Prioritize 720p, fallback to 360p
+                    NSURL *videoURL = [streamURLs objectForKey:XCDYouTubeVideoQualityHD720] ?: [streamURLs objectForKey:XCDYouTubeVideoQualityMedium360];
                     
                     if (videoURL) {
                         // 4. Initialize and present the native AVPlayer
@@ -42,7 +44,7 @@
                             [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
                         }];
                     } else {
-                        // Stream URL not found (e.g., restricted video)
+                        // Stream URL not found (e.g., age-restricted video)
                         CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Could not find a playable stream URL."];
                         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
                     }
